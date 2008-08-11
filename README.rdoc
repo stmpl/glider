@@ -1,6 +1,6 @@
-= Effect.Glider
+= Glider
 
-Effect.Glider is a Javascript glider control, based on script.aculo.us. It lets <b>content glide in and out
+Glider is a Javascript glider control, based on script.aculo.us. It lets <b>content glide in and out
 of a surrounding div in either horizontal or vertical direction</b>.
 
 
@@ -46,7 +46,7 @@ to glide div#section1 into view.
 
 == TODOs/ Bugs
 
-Currently Effect.Glider only supports Firefox and Safari.
+Currently Glider only supports Firefox and Safari.
 
 
 == Author
