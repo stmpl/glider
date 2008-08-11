@@ -1,0 +1,54 @@
+= Effect.Glider
+
+Effect.Glider is a Javascript glider control, based on script.aculo.us. It lets <b>content glide in and out
+of a surrounding div in either horizontal or vertical direction</b>.
+
+
+== Usage
+
+Just <b>include glider.js in your page and initialize the glider</b> with
+
+  glider = new Glider($('glider'));
+
+You can specify the direction and a callback that will be invoked when the glider glides by specifying an options hash:
+
+  glider = new Glider($('glider', { direction: 'x', onGlide: myCallback }));
+
+The glider's direction defaults to horizontal (x). Additionally to the Glider class, there is a GliderLink class. Just
+<b>instantiate a new GliderLink for all links on the page that are supposed to trigger the glider</b>, e.g.:
+
+  $$('a[href^="#"]').each(function(link) {
+    link = new GliderLink(link, glider);
+  });
+
+Setup of the HTML required for the glider to work is pretty straight forward. You need <b>a surrounding div, a div that
+marks the list of sections the glider can glide and one div fore each section</b>:
+
+  <div id="glider">
+    <div class="sections">
+      <div id="section1" class="section">
+        section1
+      </div>
+      <div id="section2" class="section">
+        section2
+      </div>
+      <div id="section3" class="section">
+        section3
+      </div>
+    </div>
+  </div>
+
+<b>The ids of these sections have to correspond to the GliderLinks' hrefs</b>, e.g. a link with href="#section1" triggers the glider
+to glide div#section1 into view.
+
+<b>For guidance on the required CSS, see the examples</b>
+
+
+== TODOs/ Bugs
+
+Currently Effect.Glider only supports Firefox and Safari.
+
+
+== Author
+
+Copyright (c) 2008 Marco Otte-Witte (http://simplabs.com/#projects), released under the MIT license
