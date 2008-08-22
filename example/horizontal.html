@@ -29,6 +29,7 @@
 		    background-color: white;
         overflow: hidden;
         width: 300px;
+        z-index: 2;
       }
 
       div#glider div.sections {
@@ -44,12 +45,10 @@
 		</style>
 		<script type="text/javascript" charset="utf-8">
       document.observe('dom:loaded', function() {
-        if (!Prototype.Browser.IE && !Prototype.Browser.Opera) {
-          glider = new Glider($('glider'));
-          $$('a[href^="#"]').each(function(link) {
-            link = new GliderLink(link, glider);
-          });
-        }
+        var glider = new Glider($('glider'));
+        $$('a[href^="#"]').each(function(link) {
+          link = new GliderLink(link, glider);
+        });
       });
     </script>
 	</head>
