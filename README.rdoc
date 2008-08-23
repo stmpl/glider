@@ -46,4 +46,4 @@ to glide div#section1 into view.
 
 == Author
 
-Copyright (c) 2008 Marco Otte-Witte (http://simplabs.com/#projects), released under the MIT license
+Copyright (c) 2008 Marco Otte-Witte (http://simplabs.com), released under the MIT license
