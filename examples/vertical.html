@@ -8,7 +8,7 @@
 		<meta name="content-language" content="en"/>
 		<meta name="publisher" content="Marco Otte-Witte" />
 		<meta name="author" content="Marco Otte-Witte - http://simplabs.com" />
-		<title>Effect.Glider - horizontal example</title>
+		<title>Glider - vertical example</title>
 		<script type="text/javascript" src="../lib/prototype.js"></script>
 		<script type="text/javascript" src="../lib/scriptaculous.js"></script>
 		<script type="text/javascript" src="../src/glider.js"></script>
@@ -29,7 +29,7 @@
 		    background-color: white;
         overflow: hidden;
         width: 300px;
-        z-index: 2;
+        position: relative;
       }
 
       div#glider div.sections {
@@ -40,12 +40,11 @@
       	z-index: 1;
       	width: 260px;
       	padding: 20px;
-      	float: left;
       }
 		</style>
 		<script type="text/javascript" charset="utf-8">
       document.observe('dom:loaded', function() {
-        var glider = new Glider($('glider'));
+        var glider = new Glider($('glider'), { direction: 'y' });
         $$('a[href^="#"]').each(function(link) {
           link = new GliderLink(link, glider);
         });
@@ -68,7 +67,7 @@
           <h2>This is section 2!</h2>
           <p>Aenean vel mi. Donec blandit mauris convallis lacus. Sed a urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus hendrerit. Curabitur libero leo, laoreet nec, lobortis in, auctor malesuada, metus. Vivamus ultrices eros eget pede. Morbi facilisis leo ut elit. Fusce viverra iaculis risus. Pellentesque posuere faucibus sem. Praesent et felis ac lorem laoreet venenatis.</p>
         </div>
-        <div id="section3" class="section">
+        <div id="section3" class="section initial">
           <h2>This is section 3!</h2>
           <p>Etiam pede. Sed et orci quis nulla condimentum suscipit. Fusce quam lectus, tincidunt quis, gravida vel, interdum non, quam. Phasellus nibh pede, rhoncus id, bibendum non, eleifend sit amet, dui. Integer non nibh quis magna elementum condimentum. Etiam varius iaculis nunc. Curabitur et metus in lectus malesuada venenatis. Aliquam erat volutpat. Aliquam sit amet ligula ut eros consequat laoreet. Ut accumsan, urna eu ullamcorper fermentum, ipsum nunc aliquam odio, lobortis interdum sem leo sed metus. Nam quis purus a est luctus laoreet. Nulla bibendum. Sed non pede non quam dictum eleifend.</p>
         </div>

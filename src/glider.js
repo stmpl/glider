@@ -6,13 +6,25 @@ var Glider = Class.create({
     this.container = $(container);
     this.callback = callback;
     this.options = $H({ direction: 'x', transition: Effect.Transitions.sinoidal }).merge(options);
-    this.sections = container.select('div.section');
+    this.sectionsContainer = this.container.down('.sections');
+    this.sections = this.sectionsContainer.select('.section');
     this.container.setStyle({
       height: this.sections.first().getHeight() + 'px'
     });
     this.current = { section: this.sections[0], index: 0 };
-    if ((initial = this.container.select('div.initial')).length > 0) {
-      this.show(initial[0].id, 0.0000000000001);
+    this.setInitial();
+  },
+  
+  setInitial: function() {
+    initial = null;
+    if ((initialSection = this.sectionsContainer.select('.initial')).length == 1) {
+      initial = initialSection[0];
+    }
+    if (document.location.href.indexOf('#') > 0) {
+      initial = this.findSection(document.location.href.split('#').last());
+    }
+    if (initial) {
+      this.show(initial.id, 0.0000000000001);
     }
   },
 
@@ -26,63 +38,57 @@ var Glider = Class.create({
     });
     return index;
   },
+  
+  findSection: function(section) {
+    return this.sections.find(function(s) {
+      return s.id == section;
+    });
+  },
 
   calculateEffects: function() {
     effects = [];
-    switch(this.options.get('direction')) {
-      case 'x':
-        this.sections.each(function(section) {
-          effects.push(new Effect.Move(section, {
-            x: section.getWidth() * (this.current.index - index),
-            y: 0,
-            transition: this.options.get('transition')
-          }));
-        }, this);
-        break;
-      case 'y':
-        direction = (this.current.index < index) ? -1 : 1;
-        offset = 0;
-        if (this.current.index < index) {
-          for (i = this.current.index; i < index; i++) {
-            offset += this.sections[i].getHeight();
-          }
-        } else if (this.current.index > index) {
-          for (i = index; i < this.current.index; i++) {
-            offset += this.sections[i].getHeight();
-          }
-        }
-        this.sections.each(function(section) {
-          effects.push(new Effect.Move(section, {
-            x: 0,
-            y: offset * direction,
-            transition: this.options.get('transition')
-          }));
-        }, this);
-        factor = this.sections[index].getHeight() / this.current.section.getHeight();
-        effects.push(new Effect.Scale(this.container, factor * 100, { scaleX: false, scaleContent: false }));
-        break;
+    direction = (this.current.index < index) ? -1 : 1;
+    offsetX = 0;
+    offsetY = 0;
+    if (this.current.index < index) {
+      for (i = this.current.index; i < index; i++) {
+        offsetX += this.sections[i].getWidth();
+        offsetY += this.sections[i].getHeight();
+      }
+    } else if (this.current.index > index) {
+      for (i = index; i < this.current.index; i++) {
+        offsetX += this.sections[i].getWidth();
+        offsetY += this.sections[i].getHeight();
+      }
     }
+    effects.push(new Effect.Move(this.sectionsContainer, {
+      x: (this.options.get('direction') == 'x' ? (offsetX * direction) : 0),
+      y: (this.options.get('direction') == 'y' ? (offsetY * direction) : 0),
+      transition: this.options.get('transition')
+    }));
+    if (this.options.get('direction') == 'x') {
+      factor = this.sections[index].getWidth() / this.current.section.getWidth();
+      scaleOptions = { scaleX: true, scaleY: false, scaleContent: false }
+    } else {
+      factor = this.sections[index].getHeight() / this.current.section.getHeight();
+      scaleOptions = { scaleX: false, scaleY: true, scaleContent: false }
+    }
+    effects.push(new Effect.Scale(this.container, factor * 100, scaleOptions));
     return effects;
   },
 
   show: function(section, duration) {
-    if (this.working) {
-      return;
-    }
-    section = this.container.select('#' + section)[0];
-    if (section == undefined) {
-      return;
-    }
+    section = this.findSection(section);
+    if (section == undefined) return;
+    if (this.working) return;
+    this.working = true;
     index = this.findIndex(section);
     effects = this.calculateEffects();
     new Effect.Parallel(effects, {
       duration: (duration || .6),
-      beforeStart: function() {
-        this.working = true;
-      },
       afterFinish: function() {
         this.working = false;
-      }
+      }.bind(this)
     });
     this.current = { section: section, index: index}
     if (this.options.get('onSlide')) {

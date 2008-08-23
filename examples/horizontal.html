@@ -8,7 +8,7 @@
 		<meta name="content-language" content="en"/>
 		<meta name="publisher" content="Marco Otte-Witte" />
 		<meta name="author" content="Marco Otte-Witte - http://simplabs.com" />
-		<title>Effect.Glider - vertical example</title>
+		<title>Glider - horizontal example</title>
 		<script type="text/javascript" src="../lib/prototype.js"></script>
 		<script type="text/javascript" src="../lib/scriptaculous.js"></script>
 		<script type="text/javascript" src="../src/glider.js"></script>
@@ -27,8 +27,9 @@
 		
 		  div#glider {
 		    background-color: white;
+		    width: 300px;
         overflow: hidden;
-        width: 300px;
+        position: relative;
       }
 
       div#glider div.sections {
@@ -36,14 +37,14 @@
       }
 
       div#glider div.section {
-      	z-index: 1;
       	width: 260px;
       	padding: 20px;
+      	float: left;
       }
 		</style>
 		<script type="text/javascript" charset="utf-8">
       document.observe('dom:loaded', function() {
-        glider = new Glider($('glider'), { direction: 'y' });
+        var glider = new Glider($('glider'));
         $$('a[href^="#"]').each(function(link) {
           link = new GliderLink(link, glider);
         });

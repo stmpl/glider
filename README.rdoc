@@ -44,11 +44,6 @@ to glide div#section1 into view.
 <b>For guidance on the required CSS, see the examples</b>
 
 
-== TODOs/ Bugs
-
-Currently Glider only supports Firefox and Safari.
-
-
 == Author
 
 Copyright (c) 2008 Marco Otte-Witte (http://simplabs.com/#projects), released under the MIT license
