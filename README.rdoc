@@ -38,8 +38,9 @@ marks the list of sections the glider can glide and one div fore each section</b
     </div>
   </div>
 
-<b>The ids of these sections have to correspond to the GliderLinks' hrefs</b>, e.g. a link with href="#section1" triggers the glider
-to glide div#section1 into view.
+<b>The ids of these sections have to correspond to the GliderLinks' hrefs</b>, e.g. a link with href="#section1" triggers the glider to glide div#section1 into view.
+
+Glider will also scale the surrounding container (div#glider) to match the current section's width or height respectively. To disable that scaling, simply specify a fixed width and/or height for all sections.
 
 <b>For guidance on the required CSS, see the examples</b>
 
