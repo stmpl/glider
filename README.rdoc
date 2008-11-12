@@ -10,9 +10,9 @@ Just <b>include glider.js in your page and initialize the glider</b> with
 
   glider = new Glider($('glider'));
 
-You can specify the direction and a callback that will be invoked when the glider glides by specifying an options hash:
+You can also specify the direction and parameters for the animation as well as a callback that will be invoked when the glider glides:
 
-  glider = new Glider($('glider', { direction: 'x', onGlide: myCallback, duration: .6 }));
+  glider = new Glider($('glider', { direction: 'x', transition: Effect.Transitions.sinoidal, duration: .6 }, myCallBackFunction));
 
 The glider's direction defaults to horizontal (x). Additionally to the Glider class, there is a GliderLink class. Just
 <b>instantiate a new GliderLink for all links on the page that are supposed to trigger the glider</b>, e.g.:
